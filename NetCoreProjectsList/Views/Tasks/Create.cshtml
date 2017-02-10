@@ -1,0 +1,73 @@
+@model NetCoreProjectsList.Models.Task
+
+@{
+    var isEdit = (Model?.TaskId != null);
+    string actionName;
+    if (isEdit)
+    {
+        actionName = nameof(NetCoreProjectsList.Controllers.TasksController.Edit);
+    }
+    else
+    {
+        actionName = nameof(NetCoreProjectsList.Controllers.TasksController.Create);
+    }
+}
+
+<h2>@actionName</h2>
+
+<form asp-action="@actionName" method="post" asp-antiforgery="true">
+    <input type="hidden" asp-for="TaskId" />
+    <input type="hidden" asp-for="ProjectId" />
+    <input type="hidden" asp-for="Project.Name" />
+    <div class="form-horizontal">
+        <h4>Task</h4>
+        <hr />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <span class="control-label col-md-2">Name</span>
+            <div class="col-md-10">
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <span class="control-label col-md-2">Description</span>
+            <div class="col-md-10">
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <span class="control-label col-md-2">Hours Spent</span>
+            <div class="col-md-10">
+                <input asp-for="HoursSpent" class="form-control" />
+                <span asp-validation-for="HoursSpent" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <span class="control-label col-md-2">Hours Predicted</span>
+            <div class="col-md-10">
+                <input asp-for="HoursPredicted" class="form-control" />
+                <span asp-validation-for="HoursPredicted" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <span class="control-label col-md-2">Percent Done</span>
+            <div class="col-md-10">
+                <input asp-for="PercentDone" class="form-control" />
+                <span asp-validation-for="PercentDone" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <span class="control-label col-md-2">Project</span>
+            <div class="col-md-10">
+                <input disabled type="text" value="@Model.Project.Name" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>

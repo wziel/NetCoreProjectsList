@@ -1,0 +1,36 @@
+﻿@model NetCoreProjectsList.Models.Task
+
+<h2>Details</h2>
+
+<div>
+    <h4>Task</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>Name</dt>
+        <dd>@Model.Name</dd>
+    </dl>
+    <dl class="dl-horizontal">
+        <dt>Description</dt>
+        <dd>@Model.Description</dd>
+    </dl>
+    <dl class="dl-horizontal">
+        <dt>Hours spent</dt>
+        <dd>@Model.HoursSpent</dd>
+    </dl>
+    <dl class="dl-horizontal">
+        <dt>Hours predicted</dt>
+        <dd>@Model.HoursPredicted</dd>
+    </dl>
+    <dl class="dl-horizontal">
+        <dt>Percent done</dt>
+        <dd>@Model.PercentDone</dd>
+    </dl>
+    <dl class="dl-horizontal">
+        <dt>Project</dt>
+        <dd>@Model.Project.Name</dd>
+    </dl>
+</div>
+<p>
+    <a asp-action="Edit" asp-route-id="@Model.TaskId">Edit</a> |
+    <a asp-action="Details" asp-controller="Projects" asp-route-id="@Model.ProjectId">Back to list</a>
+</p>

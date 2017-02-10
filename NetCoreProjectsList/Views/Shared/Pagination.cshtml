@@ -1,0 +1,32 @@
+﻿@model NetCoreProjectsList.Componenets.Paging.PagingInfo
+
+@{ 
+    var startPage = Math.Max(1, Model.CurrentPage - 2);
+    var endPage = Math.Min(Model.LastPage, Model.CurrentPage + 2);
+}
+
+<nav>
+    <ul class="pagination">
+        @if (!Model.IsFirstPage)
+            {
+            <li>
+                <a aria-label="Previous" asp-route-nameFilter="@ViewBag.NameFilter" asp-route-pageNo="@(Model.CurrentPage - 1)">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+        }
+        @for(var currPage = startPage; currPage <= endPage; currPage++)
+        {
+            var className = currPage == Model.CurrentPage ? "active" : "";
+            <li class="@className" ><a asp-route-nameFilter="@ViewBag.NameFilter" asp-route-pageNo="@currPage">@currPage</a></li>
+        }
+        @if (!Model.IsLastPage)
+            {
+            <li>
+                <a aria-label="Next" asp-route-nameFilter="@ViewBag.NameFilter" asp-route-pageNo="@(Model.CurrentPage + 1)">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        }
+    </ul>
+</nav>

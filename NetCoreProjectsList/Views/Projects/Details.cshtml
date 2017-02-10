@@ -1,0 +1,44 @@
+@model NetCoreProjectsList.Models.Project
+
+<h2>Details</h2>
+
+<div>
+    <h4>Project</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>Name</dt>
+        <dd>@Model.Name</dd>
+    </dl>
+</div>
+<p>
+    <a asp-action="Edit" asp-route-id="@Model.ProjectId">Edit</a> |
+    <a asp-action="Index">Back to list</a>
+</p>
+
+<div>
+    <h4>Tasks</h4>
+    <p>
+        <a asp-controller="Tasks" asp-action="Create" asp-route-projectId="@Model.ProjectId">Create new</a>
+    </p>
+    <hr />
+    <table class="table">
+        <tr>
+            <th>Name</th>
+            <th>Done</th>
+            <th colspan="3"></th>
+        </tr>
+
+        @foreach (var task in Model.Tasks)
+        {
+            <tr>
+                <td>@task.Name</td>
+                <td>@(task.PercentDone != null ? $"{task.PercentDone}%" : "-")</td>
+                <td><a asp-controller="Tasks" asp-action="Details" asp-route-id="@task.TaskId" asp-route-projectId="@Model.ProjectId">Details</a></td>
+                <td><a asp-controller="Tasks" asp-action="Edit" asp-route-id="@task.TaskId" asp-route-projectId="@Model.ProjectId">Edit</a></td>
+                <td><a asp-controller="Tasks" asp-action="Delete" asp-route-id="@task.TaskId" asp-route-projectId="@Model.ProjectId">Delete</a></td>
+            </tr>
+        }
+
+    </table>
+
+</div>
